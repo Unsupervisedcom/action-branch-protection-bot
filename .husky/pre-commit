@@ -8,5 +8,3 @@ rm -rf node_modules
 npm install
 cd node_modules
 git add . --force
-# exit 0 to stop commit if there are changes in node_modules
-git diff node_modules/ | wc -l | grep 0
