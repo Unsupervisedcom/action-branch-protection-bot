@@ -1,7 +1,7 @@
 {
-  "name": "action-javascript-action-template",
+  "name": "action-branch-protection-bot",
   "version": "1.0.0",
-  "description": "Repository template for github javascript actions",
+  "description": "Action to modify branch protections",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Unsupervisedcom/action-javascript-action-template.git"
+    "url": "git+https://github.com/Unsupervisedcom/action-branch-protection-bot.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Unsupervisedcom/action-javascript-action-template/issues"
+    "url": "https://github.com/Unsupervisedcom/action-branch-protection-bot/issues"
   },
-  "homepage": "https://github.com/Unsupervisedcom/action-javascript-action-template#readme",
+  "homepage": "https://github.com/Unsupervisedcom/action-branch-protection-bot#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@octokit/rest": "^18.12.0"
+  },
   "devDependencies": {
     "husky": "^7.0.0"
   }

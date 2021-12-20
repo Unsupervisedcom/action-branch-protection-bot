@@ -1,13 +1,29 @@
-name: 'Hello World' # taken from https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
-description: 'Greet someone and record the time'
+name: 'Branch Protection Bot'
+description: 'An action to modify branch protection settings'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  token:
+    description: 'Github token to use'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  set-include-admins:
+    description: 'Boolean, if true the action will set `include admins` on the branch protection rule'
+    required: false
+    default: true
+  include-admins:
+    description: 'Boolean, if true the action will set `include admins` to true on the branch protection rule, else it will set `include admins` to false'
+    required: false
+    default: false
+  owner:
+    description: 'Repo owner'
+    required: false
+    default: '${{ github.repository_owner }}'
+  repo:
+    description: 'Github repo name'
+    required: false
+    default: '${{ github.event.repository.name }}'
+  branch:
+    description: 'Branch change branch protection rules for'
+    required: false
+    default: '${{ github.ref }}'
 runs:
   using: 'node16'
   main: 'index.js'

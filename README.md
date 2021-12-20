@@ -13,7 +13,7 @@ Greet someone and record the time
 <!-- start usage -->
 
 ```yaml
-- uses: Unsupervisedcom/action-javascript-action-template@undefined
+- uses: Unsupervisedcom/action-branch-protection-bot@v1
   with:
     # Who to greet
     # Default: World
@@ -49,7 +49,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: Unsupervisedcom/action-javascript-action-template@v1
+        uses: Unsupervisedcom/action-branch-protection-bot@v1
         with:
           who-to-greet: "Mona the Octocat"
       # Use the output from the `hello` step
