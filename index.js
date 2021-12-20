@@ -1,16 +1,43 @@
-// replace with your code, demo from https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
-const core = require('@actions/core');
-const github = require('@actions/github');
+const core = require('@actions/core')
+const github = require('@actions/github')
+const {Octokit} = require("@octokit/rest");
 
 try {
-    // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput('who-to-greet');
-    console.log(`Hello ${nameToGreet}!`);
-    const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
+    const token = core.getInput('token')
+    const setIncludeAdmins = core.getBooleanInput('set-include-admins')
+    const includeAdmins = core.getBooleanInput('include-admins')
+    const owner = core.getInput('owner')
+    const repo = core.getInput('repo')
+    const branch = core.getInput('branch')
+    const octokit = new Octokit({
+        auth: token,
+    });
+
+    if (setIncludeAdmins === true) {
+        const params = {
+            owner,
+            repo,
+            branch
+        }
+        if (includeAdmins === true) {
+            octokit.rest.repos.setAdminBranchProtection(params)
+                .then(() => {
+                    core.info("Enabled include admins setting")
+                }).catch(error => {
+                core.error(`Error encountered attempting to enable include admins setting`)
+                core.setFailed(error)
+            });
+        } else if (includeAdmins === false) {
+            octokit.rest.repos.deleteAdminBranchProtection(params)
+                .then(() => {
+                    core.info("Disabled include admins setting")
+                }).catch(error => {
+                core.error(`Error encountered attempting to disable include admins setting`)
+                core.setFailed(error)
+            });
+        }
+    }
+
 } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error)
 }
