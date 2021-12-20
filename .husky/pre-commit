@@ -3,6 +3,7 @@ set -e
 
 . "$(dirname "$0")/_/husky.sh"
 
+cd "$(dirname "$0")/.."
 rm -rf node_modules
 npm install
 cd node_modules
