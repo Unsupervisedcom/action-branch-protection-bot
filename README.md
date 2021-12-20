@@ -1,11 +1,11 @@
 <!-- start title -->
 
-# GitHub Action:Hello World
+# GitHub Action:Branch Protection Bot
 
 <!-- end title -->
 <!-- start description -->
 
-Greet someone and record the time
+An action to modify branch protection settings
 
 <!-- end description -->
 <!-- start contents -->
@@ -13,19 +13,45 @@ Greet someone and record the time
 <!-- start usage -->
 
 ```yaml
-- uses: Unsupervisedcom/action-branch-protection-bot@v1
+- uses: Unsupervisedcom/action-branch-protection-bot@undefined
   with:
-    # Who to greet
-    # Default: World
-    who-to-greet: ""
+    # Github token to use
+    token: ""
+
+    # Boolean, if true the action will set `include admins` on the branch protection
+    # rule
+    # Default: true
+    set-include-admins: ""
+
+    # Boolean, if true the action will set `include admins` to true on the branch
+    # protection rule, else it will set `include admins` to false
+    # Default: false
+    include-admins: ""
+
+    # Repo owner
+    # Default: ${{ github.repository_owner }}
+    owner: ""
+
+    # Github repo name
+    # Default: ${{ github.event.repository.name }}
+    repo: ""
+
+    # Branch change branch protection rules for
+    # Default: ${{ github.ref }}
+    branch: ""
 ```
 
 <!-- end usage -->
    <!-- start inputs -->
 
-| **Input**          | **Description** | **Default** | **Required** |
-| :----------------- | :-------------- | :---------: | :----------: |
-| **`who-to-greet`** | Who to greet    |   `World`   |   **true**   |
+| **Input**                | **Description**                                                                                                                         |              **Default**              | **Required** |
+| :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------------------: | :----------: |
+| **`token`**              | Github token to use                                                                                                                     |                                       |   **true**   |
+| **`set-include-admins`** | Boolean, if true the action will set `include admins` on the branch protection rule                                                     |                `true`                 |  **false**   |
+| **`include-admins`**     | Boolean, if true the action will set `include admins` to true on the branch protection rule, else it will set `include admins` to false |                                       |  **false**   |
+| **`owner`**              | Repo owner                                                                                                                              |   `${{ github.repository_owner }}`    |  **false**   |
+| **`repo`**               | Github repo name                                                                                                                        | `${{ github.event.repository.name }}` |  **false**   |
+| **`branch`**             | Branch change branch protection rules for                                                                                               |          `${{ github.ref }}`          |  **false**   |
 
 <!-- end inputs -->
    <!-- start outputs -->
